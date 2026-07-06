@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Prathamesh Naik — Data Science Analyst | Pixel Desktop Portfolio</title>
+<meta name="description" content="Prathamesh Naik — Data Science Analyst, GenAI builder, and BlendTrend founder. An interactive retro pixel-desktop portfolio: explore projects, experience, and skills like a 16-bit game.">
+<meta name="author" content="Prathamesh Naik">
+<meta property="og:title" content="Prathamesh Naik — Pixel Desktop Portfolio">
+<meta property="og:description" content="Data Science Analyst · Forecasting & Predictive Modeling · GenAI & LLM Workflows. Explore an interactive retro-pixel desktop portfolio.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prathamesh Naik — Pixel Desktop Portfolio">
+<meta name="twitter:description" content="Data Science Analyst · GenAI builder · BlendTrend founder. Explore my work through a retro pixel desktop.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Prathamesh Naik",
+  "jobTitle": "Data Science Analyst",
+  "email": "mailto:prathameshnaik922@gmail.com",
+  "url": "https://github.com/PrathamDataBot",
+  "sameAs": [
+    "https://github.com/PrathamDataBot",
+    "https://linkedin.com/in/prathamesh-naik-5a59081b1"
+  ],
+  "address": { "@type": "PostalAddress", "addressLocality": "Nagpur", "addressRegion": "Maharashtra", "addressCountry": "IN" }
+}
+</script>
+<style>
+  :root{
+    --sky-top:#5c94fc; --sky-bottom:#a8d8ff; --sky-top-night:#0b1030; --sky-bottom-night:#1c2450;
+    --cloud:#fffdf6; --hill:#3aa123; --hill-dark:#2c7d1a; --brick:#b45a2a; --brick-dark:#7a3a18;
+    --qblock:#f8b800; --qblock-dark:#a86800; --pipe:#00a800; --pipe-dark:#006000;
+    --coin:#ffd700; --castle:#6b6b7a; --panel:#e8e4d0; --panel-dark:#2a2a3a; --ink:#20202a;
+    --cream:#fff8e7; --accent:#f8b800; --accent2:#e0402a; --focus:#ffe94a;
+    font-family: 'Courier New', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; overflow:hidden; color:var(--ink); background:#000;
+    image-rendering:pixelated; -webkit-font-smoothing:none;
+    user-select:none; -webkit-user-select:none;
+  }
+  button{font-family:inherit; cursor:pointer;}
+  .pxl{image-rendering:pixelated;}
+  .visually-hidden{position:absolute; width:1px;height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+  /* ============ BOOT SCREEN ============ */
+  #boot{
+    position:fixed; inset:0; background:#0a0a12; color:#7CFC00; z-index:9999;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:14px; letter-spacing:1px; transition:opacity .6s ease;
+  }
+  #boot .lines{width:min(90vw,560px); line-height:1.9;}
+  #boot .lines div{opacity:0; animation:bootline .1s forwards;}
+  @keyframes bootline{to{opacity:1;}}
+  #boot .bar-wrap{width:min(90vw,420px); margin-top:22px; display:flex; gap:4px;}
+  #boot .block{
+    flex:1; height:22px; background:#123; border:2px solid #234; position:relative;
+  }
+  #boot .block.filled{background:var(--qblock); border-color:var(--qblock-dark); box-shadow:inset -3px -3px 0 var(--qblock-dark), inset 3px 3px 0 #ffe08a;}
+  #boot .start-btn{
+    margin-top:26px; background:var(--qblock); color:#3a2400; border:3px solid var(--qblock-dark);
+    box-shadow:inset -4px -4px 0 var(--qblock-dark), inset 4px 4px 0 #ffe08a;
+    padding:12px 22px; font-size:13px; font-weight:bold; letter-spacing:2px; display:none;
+  }
+  #boot .start-btn:hover{filter:brightness(1.08);}
+  #boot .start-btn.show{display:inline-block; animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+
+  /* ============ DESKTOP / SCENE ============ */
+  #app{position:fixed; inset:0; overflow:hidden; opacity:0; transition:opacity .8s ease;}
+  #app.ready{opacity:1;}
+  #scene{
+    position:absolute; inset:0; top:34px; overflow:hidden;
+    background:linear-gradient(var(--sky-top), var(--sky-bottom));
+    transition:background 0.6s ease;
+  }
+  body.night #scene{background:linear-gradient(var(--sky-top-night), var(--sky-bottom-night));}
+  .layer{position:absolute; inset:0; pointer-events:none;}
+  #sun{
+    position:absolute; top:26px; right:60px; width:56px; height:56px; border-radius:0;
+    background:var(--qblock); cursor:pointer; pointer-events:auto;
+    box-shadow: 0 0 0 6px rgba(255,216,0,.25);
+    clip-path: polygon(50% 0%, 61% 22%, 85% 10%, 78% 33%, 100% 40%, 80% 55%, 92% 78%, 68% 70%, 60% 94%, 50% 74%, 40% 94%, 32% 70%, 8% 78%, 20% 55%, 0% 40%, 22% 33%, 15% 10%, 39% 22%);
+  }
+  body.night #sun{background:#e8e8f0; box-shadow:0 0 0 8px rgba(230,230,255,.25);}
+  .cloud{position:absolute; background:var(--cloud); image-rendering:pixelated;}
+  .cloud::before,.cloud::after{content:""; position:absolute; background:var(--cloud);}
+  .bird{position:absolute; width:16px; height:8px; opacity:.85;}
+  .bird span{position:absolute; width:6px; height:2px; background:var(--ink); top:3px;}
+  .bird span:first-child{left:0; transform-origin:right center; animation:flap .5s infinite alternate;}
+  .bird span:last-child{right:0; transform-origin:left center; animation:flap .5s infinite alternate-reverse;}
+  @keyframes flap{from{transform:rotate(10deg);}to{transform:rotate(-25deg);}}
+  #hills{position:absolute; left:0; right:0; bottom:64px; height:120px;}
+  .hill{position:absolute; bottom:0; width:220px; height:100px; background:var(--hill); border-radius:100px 100px 0 0; box-shadow:inset 0 -18px 0 var(--hill-dark);}
+  #ground{position:absolute; left:0; right:0; bottom:0; height:64px; background:var(--brick);
+    background-image: repeating-linear-gradient(90deg, var(--brick-dark) 0 4px, transparent 4px 32px), repeating-linear-gradient(0deg, var(--brick-dark) 0 4px, transparent 4px 32px);
+    border-top:4px solid #8a4620;
+  }
+  .deco{position:absolute; bottom:64px;}
+  .qbox{
+    width:34px; height:34px; background:var(--qblock); border:3px solid var(--qblock-dark);
+    box-shadow:inset -4px -4px 0 var(--qblock-dark), inset 4px 4px 0 #ffe08a; cursor:pointer; pointer-events:auto;
+    display:flex; align-items:center; justify-content:center; font-weight:bold; color:#3a2400; font-size:16px;
+    animation:qbounce 2.6s ease-in-out infinite;
+  }
+  .qbox.spent{background:#8a6a3a; animation:none; box-shadow:inset -4px -4px 0 #5a3f1e;}
+  @keyframes qbounce{0%,80%,100%{transform:translateY(0);}90%{transform:translateY(-5px);}}
+  .pipe-deco{width:52px; height:44px; background:var(--pipe); border:3px solid var(--pipe-dark); border-bottom:0; position:relative; cursor:pointer; pointer-events:auto;}
+  .pipe-deco::before{content:""; position:absolute; top:-10px; left:-6px; right:-6px; height:14px; background:var(--pipe); border:3px solid var(--pipe-dark);}
+  .pipe-deco.secret{box-shadow:0 0 0 0 rgba(255,215,0,0);}
+  .pipe-deco.secret:hover{box-shadow:0 0 14px 4px rgba(255,215,0,.55);}
+  .bush{width:60px; height:26px; background:var(--hill); border-radius:30px 30px 0 0; box-shadow:inset 0 -8px 0 var(--hill-dark); animation:sway 3.4s ease-in-out infinite;}
+  @keyframes sway{0%,100%{transform:skewX(0deg);}50%{transform:skewX(1.5deg);}}
+  #castle{
+    position:absolute; right:26px; bottom:64px; width:150px; height:120px; opacity:.9;
+    background:var(--castle);
+    clip-path: polygon(0% 100%, 0% 45%, 8% 45%, 8% 35%, 16% 35%, 16% 45%, 30% 45%, 30% 20%, 36% 20%, 36% 8%, 42% 8%, 42% 20%, 48% 20%, 48% 45%, 62% 45%, 62% 35%, 70% 35%, 70% 45%, 84% 45%, 84% 35%, 92% 35%, 92% 45%, 100% 45%, 100% 100%);
+  }
+  #castle .win1{position:absolute; left:37%; top:32%; width:8px; height:8px; background:var(--qblock);}
+  #castle .win2{position:absolute; left:14%; top:56%; width:7px; height:7px; background:var(--qblock);}
+  #castle .win3{position:absolute; left:72%; top:56%; width:7px; height:7px; background:var(--qblock);}
+  body.night #castle{filter:brightness(.5);}
+  body.night #castle .win1, body.night #castle .win2, body.night #castle .win3{box-shadow:0 0 6px 2px rgba(248,184,0,.8); filter:brightness(1.6);}
+  .coin-collect{
+    position:absolute; width:16px; height:16px; background:var(--coin); border-radius:50%;
+    box-shadow:inset -2px -2px 0 #a67c00, inset 2px 2px 0 #fff3b0; cursor:pointer; pointer-events:auto;
+    animation:spin 1.8s linear infinite;
+  }
+  @keyframes spin{0%,100%{transform:scaleX(1);}50%{transform:scaleX(.15);}}
+
+  /* ============ MENU BAR ============ */
+  #menubar{
+    position:absolute; top:0; left:0; right:0; height:34px; z-index:500;
+    background:var(--panel-dark); color:var(--cream); display:flex; align-items:center;
+    padding:0 10px; font-size:11px; gap:14px; border-bottom:3px solid #14141c;
+  }
+  #menubar .name{font-weight:bold; letter-spacing:1px;}
+  #menubar .grow{flex:1;}
+  #menubar .chip{display:flex; align-items:center; gap:5px; padding:3px 7px; background:#1c1c28; border:1px solid #3a3a4e;}
+  #menubar button.iconbtn{background:none; border:1px solid #3a3a4e; color:var(--cream); padding:4px 6px; font-size:12px; line-height:1;}
+  #menubar button.iconbtn:hover{background:#3a3a4e;}
+  #coincount{color:var(--focus); font-weight:bold;}
+
+  /* ============ DESKTOP ICONS ============ */
+  #icons{position:absolute; top:44px; left:14px; right:14px; display:grid; grid-template-columns:repeat(auto-fill,84px); gap:6px 4px; z-index:20;}
+  .icon{
+    width:84px; background:transparent; border:2px solid transparent; color:var(--cream);
+    text-shadow:2px 2px 0 #000; display:flex; flex-direction:column; align-items:center; gap:6px;
+    padding:8px 4px; border-radius:2px;
+  }
+  .icon:hover, .icon:focus-visible{background:rgba(255,255,255,.12); outline:2px solid var(--focus); outline-offset:1px;}
+  .icon.selected{background:rgba(80,140,255,.35); border-color:#bcd8ff;}
+  .icon .glyph{width:36px; height:36px; flex:none;}
+  .icon .lbl{font-size:10px; text-align:center; line-height:1.25;}
+
+  /* ============ PIXEL CHARACTER ============ */
+  #hero{position:absolute; bottom:64px; left:40px; width:28px; height:44px; z-index:30; transition:left 1.4s linear;}
+  #hero .frame{position:relative; width:100%; height:100%;}
+  #hero.walk{animation:herobob .3s steps(2) infinite;}
+  @keyframes herobob{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+  #hero .wave{position:absolute; top:0; right:-8px; font-size:14px; animation:wavefx .6s ease-in-out 2;}
+  @keyframes wavefx{0%,100%{transform:rotate(0deg);}50%{transform:rotate(35deg);}}
+
+  /* ============ DOCK ============ */
+  #dock{
+    position:absolute; left:50%; bottom:10px; transform:translateX(-50%); z-index:400;
+    display:flex; gap:8px; background:rgba(20,20,30,.72); border:2px solid #3a3a4e; padding:8px 12px; border-radius:8px;
+    backdrop-filter:blur(2px);
+  }
+  #dock button{
+    background:#1c1c28; border:2px solid #3a3a4e; color:var(--cream); width:40px; height:40px;
+    display:flex; align-items:center; justify-content:center; font-size:16px; border-radius:4px;
+    transition:transform .12s ease;
+  }
+  #dock button:hover, #dock button:focus-visible{transform:translateY(-6px) scale(1.08); outline:2px solid var(--focus);}
+
+  /* ============ WINDOWS ============ */
+  .win{
+    position:absolute; min-width:280px; min-height:180px; background:var(--panel); border:3px solid var(--panel-dark);
+    box-shadow:6px 6px 0 rgba(0,0,0,.35); display:flex; flex-direction:column; z-index:100; max-width:min(92vw,720px);
+  }
+  .win.focused{box-shadow:8px 8px 0 rgba(0,0,0,.5); border-color:var(--accent2);}
+  .win .titlebar{
+    background:var(--panel-dark); color:var(--cream); padding:6px 8px; display:flex; align-items:center; gap:6px;
+    cursor:grab; font-size:11px; font-weight:bold; letter-spacing:.5px;
+  }
+  .win .titlebar:active{cursor:grabbing;}
+  .win .titlebar .tgrow{flex:1;}
+  .win .titlebar button{
+    background:var(--cream); color:var(--ink); border:1px solid #000; width:18px; height:18px; font-size:10px;
+    display:flex; align-items:center; justify-content:center; line-height:1; padding:0;
+  }
+  .win .titlebar button.close{background:var(--accent2); color:#fff;}
+  .win .body{padding:14px 16px; overflow:auto; font-size:12px; line-height:1.7; background:var(--cream); flex:1;}
+  .win.min{display:none;}
+  .win h3{font-size:13px; margin:0 0 8px; border-bottom:2px solid #d8cfa8; padding-bottom:6px;}
+  .win .tag{display:inline-block; background:#e0dcc4; border:1px solid #b8ac7a; padding:2px 6px; font-size:9px; margin:2px 4px 2px 0;}
+  .timeline-item{border-left:3px solid var(--pipe); padding:2px 0 12px 12px; margin-left:4px; position:relative;}
+  .timeline-item::before{content:""; position:absolute; left:-7px; top:2px; width:11px; height:11px; background:var(--qblock); border:2px solid var(--qblock-dark);}
+  .skillbar{background:#d8cfa8; height:12px; border:1px solid #a89968; margin:4px 0 12px;}
+  .skillbar > i{display:block; height:100%; background:var(--pipe); border-right:2px solid var(--pipe-dark);}
+  .proj-card{border:2px solid #b8ac7a; background:#fffef6; padding:10px; margin-bottom:10px;}
+  .proj-card h4{margin:0 0 4px; font-size:12.5px;}
+  a.pxl-link{color:var(--accent2); font-weight:bold;}
+  .btn-pixel{
+    background:var(--qblock); border:2px solid var(--qblock-dark); box-shadow:inset -2px -2px 0 var(--qblock-dark), inset 2px 2px 0 #ffe08a;
+    padding:8px 14px; font-size:11px; font-weight:bold; color:#3a2400; display:inline-block; margin-top:6px;
+  }
+  .btn-pixel:hover{filter:brightness(1.05);}
+
+  /* achievement toast */
+  #toast{position:absolute; top:44px; right:16px; z-index:900; display:flex; flex-direction:column; gap:8px;}
+  .toastcard{background:var(--panel-dark); color:var(--focus); border:2px solid var(--focus); padding:8px 12px; font-size:11px; box-shadow:4px 4px 0 rgba(0,0,0,.4); animation:toastin .3s ease;}
+  @keyframes toastin{from{transform:translateX(40px); opacity:0;}to{transform:translateX(0); opacity:1;}}
+
+  /* confetti */
+  .confetti{position:absolute; width:6px; height:6px; z-index:950; animation:fall linear forwards;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(360deg); opacity:0;}}
+
+  /* ============ MOBILE MAP ============ */
+  #mobilemap{display:none;}
+  @media (max-width:760px){
+    #icons{display:none;}
+    #hero{display:none;}
+    #mobilemap{
+      display:block; position:absolute; top:40px; left:0; right:0; bottom:76px; overflow-y:auto; padding:18px 12px;
+      background:linear-gradient(var(--sky-top), var(--hill));
+    }
+    .mapnode{
+      display:flex; align-items:center; gap:12px; background:rgba(255,255,255,.9); border:2px solid var(--panel-dark);
+      padding:10px; margin-bottom:14px; position:relative;
+    }
+    .mapnode::after{content:""; position:absolute; left:24px; bottom:-14px; width:3px; height:14px; background:#fff; opacity:.8;}
+    .mapnode:last-child::after{display:none;}
+    .mapnode .glyph{width:34px; height:34px; flex:none;}
+    .mapnode .lbl{font-size:11px; font-weight:bold; color:var(--ink);}
+    .win{left:2vw !important; top:8vh !important; width:96vw !important; max-width:96vw;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="boot">
+  <div class="lines" id="bootlines"></div>
+  <div class="bar-wrap" id="bootbar"></div>
+  <button class="start-btn" id="startBtn">PRESS START</button>
+</div>
+
+<div id="app" role="application" aria-label="Prathamesh Naik pixel desktop portfolio">
+  <div id="menubar">
+    <span class="name">★ PRATHAMESH.OS</span>
+    <span class="chip">v2.6.0</span>
+    <span class="chip">Coins: <span id="coincount">0</span></span>
+    <span class="grow"></span>
+    <span class="chip" id="clock">--:--</span>
+    <span class="chip">📶</span>
+    <span class="chip">🔋 92%</span>
+    <button class="iconbtn" id="themeToggle" aria-label="Toggle day/night theme" title="Toggle theme">☀</button>
+    <button class="iconbtn" id="soundToggle" aria-label="Toggle sound" title="Toggle sound">🔊</button>
+  </div>
+
+  <div id="scene">
+    <button id="sun" aria-label="A pixel sun. Try clicking it a few times." title="???"></button>
+    <div id="hills"></div>
+    <div id="castle"><div class="win1"></div><div class="win2"></div><div class="win3"></div></div>
+    <div id="ground"></div>
+  </div>
+
+  <div id="icons"></div>
+  <div id="hero"><div class="frame"></div></div>
+  <div id="mobilemap"></div>
+  <div id="dock"></div>
+  <div id="toast"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------
+   0. SAFE STORAGE (works even if storage access is blocked)
+--------------------------------------------------------------- */
+const store = {
+  get(k,d){ try{ const v = localStorage.getItem(k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+/* ---------------------------------------------------------------
+   1. PIXEL ART ENGINE — draws sprites from a grid of palette indices
+      using stacked box-shadow "pixels". 0 = transparent.
+--------------------------------------------------------------- */
+function pixelArt(grid, palette, px){
+  px = px || 3;
+  const shadows = [];
+  for(let y=0;y<grid.length;y++){
+    const row = grid[y];
+    for(let x=0;x<row.length;x++){
+      const c = row[x];
+      if(c === 0) continue;
+      shadows.push(`${x*px}px ${y*px}px 0 ${palette[c]}`);
+    }
+  }
+  return shadows.join(',');
+}
+function makeSprite(grid,palette,px,size){
+  const el = document.createElement('div');
+  el.style.width = size+'px'; el.style.height = size+'px'; el.style.position='relative';
+  const dot = document.createElement('div');
+  dot.style.width = px+'px'; dot.style.height = px+'px'; dot.style.position='absolute'; dot.style.left=0; dot.style.top=0;
+  dot.style.boxShadow = pixelArt(grid,palette,px);
+  el.appendChild(dot);
+  return el;
+}
+const P = { k:'#20202a', w:'#fff8e7', y:'#f8b800', yd:'#a86800', g:'#00a800', gd:'#006000',
+            r:'#e0402a', rd:'#8a1e0e', bl:'#4a90e2', bld:'#1e5a9e', br:'#8a5a2a', brd:'#5a3a1a',
+            gy:'#8a8a9a', gyd:'#4a4a5a', pk:'#ff8fb3', wh:'#ffffff', ppl:'#8a5cf6', gold:'#ffd700' };
+/* Bare tokens used as palette-index literals inside GLYPHS grids below (self-named strings) */
+const k='k', w='w', y='y', yd='yd', g='g', gd='gd', r='r', rd='rd',
+      bl='bl', bld='bld', br='br', brd='brd', gy='gy', gyd='gyd',
+      pk='pk', wh='wh', ppl='ppl', gold='gold';
+
+/* Icon glyph grids (12x12) */
+const GLYPHS = {
+  about: [ // question block
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [1,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,0,0,3,3,3,0,0,2,2,1],
+    [1,2,0,3,3,0,3,3,0,2,2,1],
+    [1,2,0,0,0,0,3,3,0,2,2,1],
+    [1,2,0,0,0,3,3,0,0,2,2,1],
+    [1,2,0,0,0,3,3,0,0,2,2,1],
+    [1,2,0,0,0,0,0,0,0,2,2,1],
+    [1,2,0,0,0,3,3,0,0,2,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,1],
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  projects: [ // green pipe
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,2,2,2,2,2,2,2,2,2,2,0],
+    [0,2,3,2,2,3,3,2,2,3,2,0],
+    [0,2,2,2,2,2,2,2,2,2,2,0],
+    [0,0,2,2,2,2,2,2,2,2,0,0],
+    [0,0,2,3,2,2,3,3,2,2,0,0],
+    [0,0,2,2,2,2,2,2,2,2,0,0],
+    [0,0,2,2,2,2,2,2,2,2,0,0],
+    [0,0,2,3,2,2,3,3,2,2,0,0],
+    [0,0,2,2,2,2,2,2,2,2,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  experience: [ // castle
+    [1,0,1,0,1,0,1,0,1,0,1,0],
+    [1,0,1,0,1,0,1,0,1,0,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,0,0,0,2,2,0,0,0,2,1],
+    [1,2,0,3,0,2,2,0,3,0,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,0,0,2,2,2,2,0,0,2,1],
+    [1,2,0,0,2,2,2,2,0,0,2,1],
+    [1,2,0,0,2,2,2,2,0,0,2,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1]
+  ],
+  skills: [ // fire flower
+    [0,0,0,4,0,4,0,0,0,0,0,0],
+    [0,0,4,1,4,1,4,0,0,0,0,0],
+    [0,4,1,1,1,1,1,4,0,0,0,0],
+    [0,1,1,4,4,4,1,1,0,0,0,0],
+    [0,4,1,1,1,1,1,4,0,0,0,0],
+    [0,0,4,4,1,4,4,0,0,0,0,0],
+    [0,0,0,0,2,0,0,0,0,0,0,0],
+    [0,0,0,0,2,0,0,0,0,0,0,0],
+    [0,0,0,2,2,2,0,0,0,0,0,0],
+    [0,0,0,0,2,0,0,0,0,0,0,0],
+    [0,0,0,0,2,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  resume: [ // scroll
+    [0,5,5,5,5,5,5,5,5,5,5,0],
+    [5,1,1,1,1,1,1,1,1,1,1,5],
+    [5,1,6,6,6,6,6,6,6,1,1,5],
+    [5,1,6,0,0,0,0,0,6,1,1,5],
+    [5,1,6,6,6,6,6,6,6,1,1,5],
+    [5,1,6,0,0,0,0,0,6,1,1,5],
+    [5,1,6,6,6,6,6,6,6,1,1,5],
+    [5,1,1,1,1,1,1,1,1,1,1,5],
+    [5,1,1,1,1,1,1,1,1,1,1,5],
+    [0,5,5,5,5,5,5,5,5,5,5,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  github: [ // treasure chest
+    [0,7,7,7,7,7,7,7,7,7,7,0],
+    [7,7,7,7,7,7,7,7,7,7,7,7],
+    [7,8,8,8,8,8,8,8,8,8,8,7],
+    [7,8,8,8,8,gold,gold,8,8,8,8,7],
+    [7,8,8,8,8,gold,gold,8,8,8,8,7],
+    [7,8,8,8,8,8,8,8,8,8,8,7],
+    [0,7,8,8,8,8,8,8,8,8,7,0],
+    [0,7,8,8,8,8,8,8,8,8,7,0],
+    [0,7,7,7,7,7,7,7,7,7,7,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  linkedin: [ // flag pole
+    [0,0,0,0,0,0,9,9,9,9,9,0],
+    [0,0,0,0,0,0,9,10,10,10,9,0],
+    [0,0,0,0,0,0,9,10,10,10,9,0],
+    [0,0,0,0,0,0,9,9,9,9,9,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,0,0,0,0,9,0,0,0,0,0],
+    [0,0,1,1,1,1,1,1,1,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  contact: [ // mailbox
+    [0,0,11,11,11,11,11,11,0,0,0,0],
+    [0,11,2,2,2,2,2,2,11,0,0,0],
+    [11,2,2,0,0,0,0,2,2,11,0,0],
+    [11,2,2,0,0,0,0,2,2,11,0,0],
+    [11,2,2,2,2,2,2,2,2,11,0,0],
+    [0,11,11,11,11,11,11,11,0,0,0,0],
+    [0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,1,1,1,1,1,1,1,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  ai: [ // robot head
+    [0,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,0],
+    [gy,gy,bl,bl,gy,gy,gy,gy,bl,bl,gy,gy],
+    [gy,gy,bl,bl,gy,gy,gy,gy,bl,bl,gy,gy],
+    [gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy],
+    [gy,gy,gy,r,r,gy,gy,r,r,gy,gy,gy],
+    [gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy],
+    [0,gyd,gy,gy,gy,gy,gy,gy,gy,gy,gyd,0],
+    [0,0,gyd,gyd,gyd,gyd,gyd,gyd,gyd,gyd,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  data: [ // dashboard bars
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,bl,0,g,g,0,y,y,y,0,1],
+    [1,0,bl,0,g,g,0,y,y,y,0,1],
+    [1,0,bl,0,g,g,0,y,y,y,0,1],
+    [1,0,bl,bl,g,g,0,y,y,y,0,1],
+    [1,0,bl,bl,g,g,g,y,y,y,0,1],
+    [1,0,bl,bl,bl,g,g,g,y,y,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  ml: [ // brain core
+    [0,0,ppl,ppl,0,0,0,ppl,ppl,0,0,0],
+    [0,ppl,pk,pk,ppl,0,ppl,pk,pk,ppl,0,0],
+    [ppl,pk,pk,pk,ppl,ppl,pk,pk,pk,ppl,0,0],
+    [ppl,pk,wh,pk,pk,pk,pk,wh,pk,ppl,0,0],
+    [ppl,pk,pk,pk,pk,pk,pk,pk,pk,ppl,0,0],
+    [0,ppl,pk,pk,pk,pk,pk,pk,ppl,0,0,0],
+    [0,0,ppl,ppl,ppl,ppl,ppl,ppl,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  blendtrend: [ // bottle + qr
+    [0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,bl,bl,bl,bl,0,0,0,0,0,0],
+    [0,bl,wh,wh,wh,wh,bl,0,0,0,0,0],
+    [0,bl,wh,g,g,wh,bl,0,0,0,0,0],
+    [0,bl,wh,g,g,wh,bl,0,0,0,0,0],
+    [0,bl,wh,wh,wh,wh,bl,0,0,0,0,0],
+    [0,bl,wh,wh,wh,wh,bl,0,0,0,0,0],
+    [0,bl,bl,bl,bl,bl,bl,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  photo: [ // camera
+    [0,0,gy,gy,0,0,0,0,0,0,0,0],
+    [gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,0],
+    [gy,k,k,k,k,k,k,k,k,k,gy,0],
+    [gy,k,k,bl,bl,bl,bl,bl,k,k,gy,0],
+    [gy,k,bl,wh,wh,wh,wh,wh,bl,k,gy,0],
+    [gy,k,bl,wh,gy,gy,gy,wh,bl,k,gy,0],
+    [gy,k,bl,wh,gy,gy,gy,wh,bl,k,gy,0],
+    [gy,k,bl,wh,wh,wh,wh,wh,bl,k,gy,0],
+    [gy,k,k,bl,bl,bl,bl,bl,k,k,gy,0],
+    [gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,gy,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  trophy: [ // gold trophy
+    [0,gold,gold,gold,gold,gold,gold,gold,gold,gold,0,0],
+    [gold,gold,y,y,y,y,y,y,y,gold,gold,0],
+    [0,gold,y,y,y,y,y,y,y,gold,0,0],
+    [0,0,gold,y,y,y,y,y,gold,0,0,0],
+    [0,0,0,gold,y,y,y,gold,0,0,0,0],
+    [0,0,0,0,gold,gold,gold,0,0,0,0,0],
+    [0,0,0,0,gold,gold,gold,0,0,0,0,0],
+    [0,0,0,gold,gold,gold,gold,gold,0,0,0,0],
+    [0,0,gold,gold,gold,gold,gold,gold,gold,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ],
+  cert: [ // star medal
+    [0,0,0,0,y,y,0,0,0,0,0,0],
+    [0,0,0,y,y,y,y,0,0,0,0,0],
+    [0,y,y,y,y,y,y,y,y,0,0,0],
+    [y,y,y,yd,y,y,yd,y,y,y,0,0],
+    [0,y,y,y,y,y,y,y,y,0,0,0],
+    [0,0,y,y,y,y,y,y,0,0,0,0],
+    [0,0,0,r,r,r,r,0,0,0,0,0],
+    [0,0,r,r,0,0,r,r,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0]
+  ]
+};
+const PALETTES = {
+  about:{1:P.yd,2:P.y,3:P.k}, projects:{1:P.gd,2:P.g,3:P.gd},
+  experience:{1:P.k,2:P.gy,3:P.gyd}, skills:{1:P.r,2:P.g,4:P.y},
+  resume:{1:P.w,5:P.br,6:'#d8cfa8'}, github:{7:P.brd,8:P.br,gold:P.gold},
+  linkedin:{1:P.gy,9:P.gy,10:P.bl}, contact:{1:P.k,2:P.rd,11:P.rd},
+  ai:{gy:P.gy,gyd:P.gyd,bl:P.bl,r:P.r}, data:{1:P.k,bl:P.bl,g:P.g,y:P.y},
+  ml:{ppl:P.ppl,pk:P.pk,wh:P.wh}, blendtrend:{1:P.k,bl:P.bl,wh:P.wh,g:P.g},
+  photo:{gy:P.gy,k:P.k,bl:P.bl,wh:P.wh}, trophy:{gold:P.gold,y:P.y},
+  cert:{y:P.y,yd:P.yd,r:P.r}
+};
+
+/* ---------------------------------------------------------------
+   2. SOUND ENGINE — Web Audio API, no external audio files
+--------------------------------------------------------------- */
+const Sound = (function(){
+  let ctx=null, muted = store.get('pf_muted', false);
+  function ensure(){ if(!ctx){ try{ ctx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return ctx; }
+  function tone(freq,dur,type,gain,delay){
+    if(muted) return; const c = ensure(); if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator(); const g = c.createGain();
+    osc.type = type||'square'; osc.frequency.setValueAtTime(freq,t0);
+    g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(gain||0.06,t0+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    osc.connect(g); g.connect(c.destination); osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(520,.06,'square',.05); },
+    open(){ tone(440,.07,'square',.05); tone(660,.09,'square',.05,.05); },
+    close(){ tone(660,.06,'square',.05); tone(340,.09,'square',.05,.04); },
+    coin(){ tone(988,.08,'square',.06); tone(1318,.14,'square',.06,.07); },
+    notify(){ tone(784,.05,'triangle',.05); tone(988,.09,'triangle',.05,.06); },
+    startup(){ [261,329,392,523].forEach((f,i)=>tone(f,.16,'square',.05,i*.12)); },
+    achievement(){ [523,659,784,1046].forEach((f,i)=>tone(f,.14,'square',.06,i*.09)); },
+    toggleMute(){ muted = !muted; store.set('pf_muted',muted); return muted; },
+    isMuted(){ return muted; }
+  };
+})();
+
+/* ---------------------------------------------------------------
+   3. CONTENT DATA — Prathamesh's real background
+--------------------------------------------------------------- */
+const CONTENT = {
+  about: {
+    title:"About Me — Player 1",
+    html:`
+      <h3>Prathamesh Naik</h3>
+      <p><strong>Data Science Analyst</strong> · Forecasting &amp; Predictive Modeling · GenAI &amp; LLM Workflows · Python · SQL.<br>Based in Nagpur, Maharashtra, India.</p>
+      <p>I build production ML systems by day (an XGBoost demand-forecasting model running at 87% accuracy on 6GB+ of live power-plant data), ship agentic AI side projects by night, and I'm building <strong>BlendTrend</strong> — a branded-bottle customer-engagement platform — on the side.</p>
+      <div class="timeline-item"><strong>2023</strong> — B.Tech, Computer Engineering, St. Vincent Pallotti College of Engineering &amp; Technology, Nagpur.</div>
+      <div class="timeline-item"><strong>Mar–Sep 2024</strong> — Data Science Intern, ACCESS MILLION Premium Marketing Services, Pune.</div>
+      <div class="timeline-item"><strong>Dec 2024–present</strong> — Freelance Data &amp; AI Analyst, Upwork (remote).</div>
+      <div class="timeline-item"><strong>May 2025–present</strong> — Data Science Analyst, Mahagenco, Nagpur.</div>
+      <div class="timeline-item"><strong>2026</strong> — Founder, BlendTrend · Creator, Guibo · preparing for CAT 2026.</div>
+      <p style="margin-top:10px;">Open to GenAI-adjacent, remote-first roles (₹7–12 LPA band). <span class="tag">Remote-friendly</span><span class="tag">GenAI</span><span class="tag">Forecasting</span></p>
+    `
+  },
+  projects: {
+    title:"Projects — World Map",
+    html:`
+      <h3>Projects</h3>
+      <div class="proj-card"><h4>🤖 Guibo — GenAI Agentic Travel Assistant</h4>
+        <p>LangGraph + Gemini API agent with modular tool integrations for flights, hotels, and destinations. Multi-step reasoning pipeline with structured prompt engineering, +50% multi-source data-retrieval efficiency.</p>
+        <span class="tag">LangGraph</span><span class="tag">Gemini API</span><span class="tag">Agentic AI</span>
+        <div><a class="pxl-link" href="https://github.com/PrathamDataBot" target="_blank" rel="noopener">github.com/PrathamDataBot →</a></div>
+      </div>
+      <div class="proj-card"><h4>📈 Mahagenco XGBoost Demand-Forecasting Model</h4>
+        <p>87% prediction accuracy across 3 live power units at Maharashtra's largest power generator. Processed 6GB+ raw operational data via Python/SQL pipelines; automated feature engineering cut preprocessing time 30%.</p>
+        <span class="tag">XGBoost</span><span class="tag">Forecasting</span><span class="tag">Python + SQL</span>
+      </div>
+      <div class="proj-card"><h4>🏷️ Retail SKU Attribution &amp; Category Intelligence</h4>
+        <p>ML classification (Random Forest, Ridge Regression) across 85,000+ retail SKUs. Cut categorization error 28%, improved category-mapping robustness 15%, raised inventory efficiency 12%.</p>
+        <span class="tag">Random Forest</span><span class="tag">Feature Engineering</span>
+      </div>
+      <div class="proj-card"><h4>💧 BlendTrend — Branded Bottle Engagement Platform</h4>
+        <p>Founder project: an offline-to-digital customer-engagement platform using branded bottles as the acquisition channel. Four-segment ladder (Basic → Premium QR → QR+SaaS → Events &amp; Sponsors); staged Validate→Wedge→Platform→Marketplace rollout.</p>
+        <span class="tag">Founder</span><span class="tag">Staged GTM</span>
+      </div>
+      <div class="proj-card"><h4>📊 HR Analytics &amp; Workforce Reporting Automation</h4>
+        <p>Power BI + SQL + Python ETL pipelines for hiring, attrition, and leadership KPI reporting. Cut report turnaround 30%, eliminated repetitive manual reporting.</p>
+        <span class="tag">Power BI</span><span class="tag">ETL</span>
+      </div>
+      <div class="proj-card"><h4>💰 Monthly Budget Tracker</h4>
+        <p>Small web app — HTML/CSS/Chart.js, INR locale, built for personal finance tracking.</p>
+        <span class="tag">Chart.js</span>
+      </div>
+    `
+  },
+  experience: {
+    title:"Experience — Castle Levels",
+    html:`
+      <h3>Experience</h3>
+      <div class="timeline-item"><strong>Data Science Analyst · Mahagenco</strong> — May 2025–Present, Nagpur<br>
+        Engineered an XGBoost demand-forecasting model (87% accuracy, 3 live power units). Processed 6GB+ operational data with Python/SQL, raising data readiness 35%. Cut preprocessing time 30% via automated QA pipelines.</div>
+      <div class="timeline-item"><strong>Freelance Data &amp; AI Analyst · Upwork</strong> — Dec 2024–Present, Remote<br>
+        Grew client revenue 15% via Python-based pricing intelligence. Cut reporting turnaround 35% by automating SQL/Python pipelines. Delivered product-attribution reports and KPI dashboards for international clients.</div>
+      <div class="timeline-item"><strong>Data Science Intern · ACCESS MILLION Premium Marketing Services</strong> — Mar–Sep 2024, Pune<br>
+        Raised recruitment conversion 18% via consumer/retail attribution analysis. Built SQL-driven Tableau dashboards, improving HR decision-making efficiency 20%. Automated HR reporting, cutting manual workload 40%.</div>
+    `
+  },
+  skills: {
+    title:"Skill Tree",
+    html:`
+      <h3>Skills</h3>
+      <p>Python (Pandas / NumPy / Scikit-learn)</p><div class="skillbar"><i style="width:90%"></i></div>
+      <p>SQL (MySQL / PostgreSQL)</p><div class="skillbar"><i style="width:88%"></i></div>
+      <p>Power BI / Tableau</p><div class="skillbar"><i style="width:85%"></i></div>
+      <p>Forecasting &amp; Predictive Modeling</p><div class="skillbar"><i style="width:87%"></i></div>
+      <p>GenAI: LangGraph / Gemini / RAG / Prompt Engineering</p><div class="skillbar"><i style="width:70%"></i></div>
+      <p>PySpark</p><div class="skillbar"><i style="width:45%"></i></div>
+      <p>Cloud: AWS / OCI / GCP</p><div class="skillbar"><i style="width:60%"></i></div>
+      <p style="margin-top:12px;"><strong>Actively closing:</strong> dbt+Snowflake, RAG with a vector DB, Apache Airflow, Docker+FastAPI model serving. I'd rather show the honest skill tree than oversell it.</p>
+    `
+  },
+  resume: {
+    title:"Resume Scroll",
+    html:`
+      <h3>Résumé</h3>
+      <p>Full resume bullets live in every window here — this desktop <em>is</em> the resume. For a text copy:</p>
+      <a class="btn-pixel" href="mailto:prathameshnaik922@gmail.com?subject=Could%20I%20get%20a%20copy%20of%20your%20resume%3F">✉ Email me for a PDF copy</a>
+      <p style="margin-top:14px;">Certifications: Oracle Cloud Infrastructure Data Science Professional (2025) · Oracle Autonomous Database Cloud Certified Professional (2025) · Google GenAI Intensive (Google Cloud &amp; Kaggle) · Career Essentials in Generative AI (Microsoft/LinkedIn) · AWS Cloud Practitioner (Scaler) · Power BI &amp; Tableau Mastery (TopMentor).</p>
+      <p>Publication: <em>"Using Website as an Empowering Tool for NGO"</em> — International Journal for Research Publication and Seminar, Apr 2023.</p>
+    `
+  },
+  github: {
+    title:"GitHub Treasure Chest",
+    html:`<h3>GitHub</h3><p>Open-source-ish home for Guibo and other builds.</p>
+      <a class="btn-pixel" href="https://github.com/PrathamDataBot" target="_blank" rel="noopener">Open github.com/PrathamDataBot →</a>`
+  },
+  linkedin: {
+    title:"LinkedIn Flag",
+    html:`<h3>LinkedIn</h3><p>Let's connect.</p>
+      <a class="btn-pixel" href="https://linkedin.com/in/prathamesh-naik-5a59081b1" target="_blank" rel="noopener">Open LinkedIn profile →</a>`
+  },
+  contact: {
+    title:"Contact Mailbox",
+    html:`<h3>Contact</h3>
+      <p>Nagpur, Maharashtra, India (IST). Open to GenAI-adjacent, remote-first roles.</p>
+      <a class="btn-pixel" href="mailto:prathameshnaik922@gmail.com">✉ prathameshnaik922@gmail.com</a>
+      <p style="margin-top:14px; font-size:11px; color:#7a7a5a;">This opens your email client — there's no hidden form submitting your details anywhere.</p>`
+  },
+  ai: {
+    title:"AI Projects Lab",
+    html:`<h3>AI / GenAI Work</h3>
+      <p><strong>Guibo</strong> — LangGraph + Gemini API agentic travel assistant. Modular tool integrations, multi-turn context-aware reasoning, structured prompt engineering.</p>
+      <p>Currently deepening: RAG over a real vector database, and containerized model serving (Docker + FastAPI) for the Mahagenco forecasting model.</p>`
+  },
+  data: {
+    title:"Data Analytics Dashboard",
+    html:`<h3>Data Analytics</h3>
+      <p>6GB+ live operational data pipelines at Mahagenco. Product attribution &amp; KPI dashboards for Upwork clients. HR analytics automation cutting manual reporting 40%.</p>
+      <p>Stack: Python (Pandas/NumPy), SQL, Power BI, Tableau, Advanced Excel.</p>`
+  },
+  ml: {
+    title:"Machine Learning Core",
+    html:`<h3>Machine Learning</h3>
+      <p>XGBoost demand forecasting (87% accuracy) · Random Forest &amp; Ridge Regression SKU classification (85K+ SKUs) · time series, classification, regression, feature engineering, hypothesis testing.</p>`
+  },
+  blendtrend: {
+    title:"BlendTrend HQ",
+    html:`<h3>BlendTrend</h3>
+      <p>A branded-bottle customer-engagement company: the bottle is the only marketing product a customer voluntarily holds for 30–45 minutes. Four-segment ladder from a plain branded bottle up to a QR+SaaS subscription platform, plus sponsor-funded event advertising.</p>
+      <p>Staged rollout: <em>Validate → Wedge → Platform → Marketplace</em> — proving real paid pilots before building more platform.</p>`
+  },
+  photo: {
+    title:"Photography",
+    html:`<h3>Photography</h3><p>A casual side interest — mostly city and travel shots around Nagpur. Ask me for a link if you're curious.</p>`
+  },
+  achievements: {
+    title:"Achievements Trophy Room",
+    html:`<h3>Achievements</h3>
+      <p>🏆 87% accuracy production forecasting model, live at Maharashtra's largest power generator.<br>
+      🏆 -28% categorization error across 85,000+ retail SKUs.<br>
+      🏆 +15% Upwork client revenue via pricing intelligence.<br>
+      🏆 Founded BlendTrend, a real (early-stage) customer-engagement startup.</p>`
+  },
+  cert: {
+    title:"Certificates Gallery",
+    html:`<h3>Certificates</h3>
+      <p>🎖 Oracle Cloud Infrastructure Data Science Professional — Oracle University, 2025<br>
+      🎖 Oracle Autonomous Database Cloud Certified Professional — Oracle University, 2025<br>
+      🎖 Google GenAI Intensive Program — Google Cloud &amp; Kaggle<br>
+      🎖 Career Essentials in Generative AI — Microsoft &amp; LinkedIn<br>
+      🎖 AWS Cloud Practitioner — Scaler<br>
+      🎖 Power BI &amp; Tableau Mastery — TopMentor<br>
+      🎖 Data Science Bootcamp — TopMentor</p>`
+  },
+  secret: {
+    title:"??? Secret Room",
+    html:`<h3>Rejected Concepts (Trash)</h3>
+      <p>🗑 "Portfolio but it's just a spreadsheet" — vetoed immediately.<br>
+      🗑 A chatbot that only speaks in XGBoost feature-importance scores.<br>
+      🗑 BlendTrend bottles that recite your CAT percentile when you unscrew the cap.<br><br>
+      You found the warp pipe. Nothing else down here but bragging rights.</p>`
+  },
+  credits: {
+    title:"Credits",
+    html:`<h3>Credits</h3>
+      <p>Designed &amp; built as an original pixel-desktop experience — inspired by classic 16-bit platformers and retro desktop OSes, not affiliated with or depicting any copyrighted characters or assets.<br><br>
+      Music &amp; SFX: synthesized live in your browser (Web Audio API) — no audio files were harmed.<br>
+      A portfolio by Prathamesh Naik. Thanks for playing.</p>`
+  }
+};
+
+const ICON_ORDER = [
+  ['about','About Me','about'], ['projects','Projects','projects'], ['experience','Experience','experience'],
+  ['skills','Skills','skills'], ['resume','Resume','resume'], ['github','GitHub','github'],
+  ['linkedin','LinkedIn','linkedin'], ['contact','Contact','contact'], ['ai','AI Projects','ai'],
+  ['data','Data Analytics','data'], ['ml','Machine Learning','ml'], ['blendtrend','BlendTrend','blendtrend'],
+  ['photo','Photography','photo'], ['achievements','Achievements','trophy'], ['cert','Certificates','cert']
+];
+
+/* ---------------------------------------------------------------
+   4. WINDOW MANAGER
+--------------------------------------------------------------- */
+const WM = (function(){
+  let z = 100, openWins = {}, offsetSeed = 0;
+  function create(key){
+    if(openWins[key] && openWins[key].el){ focus(key); if(openWins[key].el.classList.contains('min')) toggleMin(key); return; }
+    const data = CONTENT[key]; if(!data) return;
+    const el = document.createElement('div');
+    el.className='win'; el.setAttribute('role','dialog'); el.setAttribute('aria-label',data.title);
+    offsetSeed = (offsetSeed+1)%6;
+    const baseX = 60 + offsetSeed*26, baseY = 56 + offsetSeed*22;
+    el.style.left = Math.min(baseX, window.innerWidth-360)+'px';
+    el.style.top = baseY+'px';
+    el.style.width='420px';
+    el.innerHTML = `
+      <div class="titlebar" data-drag>
+        <span>${data.title}</span><span class="tgrow"></span>
+        <button class="min" aria-label="Minimize">_</button>
+        <button class="max" aria-label="Maximize">▢</button>
+        <button class="close" aria-label="Close">×</button>
+      </div>
+      <div class="body">${data.html}</div>`;
+    document.getElementById('app').appendChild(el);
+    openWins[key] = {el, maximized:false, prevRect:null};
+    wireWindow(key, el);
+    focus(key);
+    Sound.open();
+  }
+  function wireWindow(key, el){
+    const bar = el.querySelector('[data-drag]');
+    let dragging=false, sx=0, sy=0, ox=0, oy=0;
+    bar.addEventListener('mousedown', e=>{
+      dragging=true; sx=e.clientX; sy=e.clientY;
+      const r = el.getBoundingClientRect(); ox=r.left; oy=r.top; focus(key); e.preventDefault();
+    });
+    window.addEventListener('mousemove', e=>{
+      if(!dragging) return;
+      const nx = ox + (e.clientX-sx), ny = Math.max(34,oy + (e.clientY-sy));
+      el.style.left = nx+'px'; el.style.top = ny+'px';
+    });
+    window.addEventListener('mouseup', ()=>{ dragging=false; });
+    bar.addEventListener('touchstart', e=>{
+      const t=e.touches[0]; dragging=true; sx=t.clientX; sy=t.clientY;
+      const r = el.getBoundingClientRect(); ox=r.left; oy=r.top; focus(key);
+    },{passive:true});
+    bar.addEventListener('touchmove', e=>{
+      if(!dragging) return; const t=e.touches[0];
+      el.style.left = (ox+(t.clientX-sx))+'px'; el.style.top = Math.max(34,oy+(t.clientY-sy))+'px';
+    },{passive:true});
+    bar.addEventListener('touchend', ()=>{dragging=false;});
+    el.querySelector('.close').addEventListener('click', ()=>{ close(key); });
+    el.querySelector('.min').addEventListener('click', ()=>{ toggleMin(key); });
+    el.querySelector('.max').addEventListener('click', ()=>{ toggleMax(key); });
+    el.addEventListener('mousedown', ()=>focus(key));
+  }
+  function focus(key){
+    Object.keys(openWins).forEach(k=>{ if(openWins[k].el) openWins[k].el.classList.remove('focused'); });
+    if(openWins[key] && openWins[key].el){ openWins[key].el.style.zIndex = ++z; openWins[key].el.classList.add('focused'); }
+  }
+  function close(key){ if(openWins[key]){ openWins[key].el.remove(); delete openWins[key]; Sound.close(); } }
+  function toggleMin(key){ const w=openWins[key]; if(!w) return; w.el.classList.toggle('min'); }
+  function toggleMax(key){
+    const w=openWins[key]; if(!w) return;
+    if(!w.maximized){
+      w.prevRect = {left:w.el.style.left, top:w.el.style.top, width:w.el.style.width, height:w.el.style.height};
+      w.el.style.left='2%'; w.el.style.top='40px'; w.el.style.width='96%'; w.el.style.height='calc(100% - 100px)';
+      w.maximized=true;
+    } else {
+      Object.assign(w.el.style, w.prevRect || {}); w.el.style.height='auto'; w.maximized=false;
+    }
+  }
+  return {create, focus, close};
+})();
+
+/* ---------------------------------------------------------------
+   5. BUILD DESKTOP CONTENTS
+--------------------------------------------------------------- */
+function buildIcons(){
+  const wrap = document.getElementById('icons');
+  const mapwrap = document.getElementById('mobilemap');
+  ICON_ORDER.forEach(([key,label,glyphKey])=>{
+    const btn = document.createElement('button');
+    btn.className='icon'; btn.setAttribute('aria-label','Open '+label);
+    const glyph = makeSprite(GLYPHS[glyphKey], PALETTES[glyphKey], 3, 36);
+    glyph.className='glyph';
+    btn.appendChild(glyph);
+    const lbl = document.createElement('span'); lbl.className='lbl'; lbl.textContent = label; btn.appendChild(lbl);
+    let clicks=0, clickTimer=null;
+    function activate(){ Sound.click(); WM.create(key); }
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.icon.selected').forEach(i=>i.classList.remove('selected'));
+      btn.classList.add('selected');
+      clicks++;
+      if(clicks===1){ clickTimer=setTimeout(()=>{clicks=0;},320); }
+      else { clearTimeout(clickTimer); clicks=0; activate(); }
+    });
+    btn.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); activate(); } });
+    wrap.appendChild(btn);
+
+    const node = document.createElement('button');
+    node.className='mapnode'; node.setAttribute('aria-label','Open '+label);
+    const glyph2 = makeSprite(GLYPHS[glyphKey], PALETTES[glyphKey], 3, 34); glyph2.className='glyph';
+    node.appendChild(glyph2);
+    const lbl2 = document.createElement('span'); lbl2.className='lbl'; lbl2.textContent = label; node.appendChild(lbl2);
+    node.addEventListener('click', activate);
+    mapwrap.appendChild(node);
+  });
+}
+
+function buildScenery(){
+  const scene = document.getElementById('scene');
+  // clouds
+  for(let i=0;i<5;i++){
+    const c = document.createElement('div'); c.className='cloud pxl';
+    const w = 60+Math.random()*40, top = 20+Math.random()*90, dur = 40+Math.random()*30, delay=-Math.random()*dur;
+    c.style.width=w+'px'; c.style.height=(w*0.4)+'px'; c.style.top=top+'px'; c.style.left='-120px';
+    c.style.animation = `cloudmove ${dur}s linear ${delay}s infinite`;
+    scene.appendChild(c);
+  }
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `@keyframes cloudmove{from{transform:translateX(0);}to{transform:translateX(160vw);}}`;
+  document.head.appendChild(styleTag);
+  // birds
+  for(let i=0;i<3;i++){
+    const b=document.createElement('div'); b.className='bird';
+    b.style.top=(30+Math.random()*60)+'px'; b.style.left='-20px';
+    b.innerHTML='<span></span><span></span>';
+    b.style.animation = `birdmove ${18+Math.random()*10}s linear ${-Math.random()*20}s infinite`;
+    scene.appendChild(b);
+  }
+  const st2 = document.createElement('style'); st2.textContent = `@keyframes birdmove{from{transform:translateX(0) translateY(0);}50%{transform:translateX(80vw) translateY(-20px);}to{transform:translateX(160vw) translateY(0);}}`;
+  document.head.appendChild(st2);
+  // hills
+  const hillsWrap = document.getElementById('hills');
+  [ [0,'220px'], [180,'170px'], [420,'260px'] ].forEach(([left,w],i)=>{
+    const h=document.createElement('div'); h.className='hill'; h.style.left=left+'px'; h.style.width=w;
+    hillsWrap.appendChild(h);
+  });
+  // ground decorations
+  const decos = [];
+  for(let i=0;i<7;i++){
+    const x = 40 + i*130;
+    if(i%3===0){ decos.push({x, type:'qbox'}); }
+    else if(i%3===1){ decos.push({x, type: i===4 ? 'pipe-secret' : 'pipe'}); }
+    else { decos.push({x, type:'bush'}); }
+  }
+  decos.forEach(d=>{
+    const el = document.createElement('div'); el.className='deco'; el.style.left=d.x+'px';
+    if(d.type==='qbox'){
+      el.classList.add('qbox'); el.textContent='?'; el.setAttribute('role','button'); el.tabIndex=0;
+      el.setAttribute('aria-label','Question block — bump for a coin');
+      el.addEventListener('click', ()=>{
+        if(el.classList.contains('spent')) return;
+        el.classList.add('spent'); el.textContent='';
+        Sound.coin(); updateCoins(1);
+        spawnCoinPop(el);
+      });
+    } else if(d.type==='pipe' || d.type==='pipe-secret'){
+      el.classList.add('pipe-deco');
+      if(d.type==='pipe-secret'){
+        el.classList.add('secret'); el.tabIndex=0; el.setAttribute('role','button');
+        el.setAttribute('aria-label','A suspicious pipe...');
+        el.addEventListener('click', ()=>{ Sound.notify(); WM.create('secret'); toast('You found the warp pipe! 🟢'); });
+      }
+    } else {
+      el.classList.add('bush');
+    }
+    scene.appendChild(el);
+  });
+  function spawnCoinPop(sourceEl){
+    const r = sourceEl.getBoundingClientRect();
+    const pop = document.createElement('div');
+    pop.textContent='+1'; pop.style.position='fixed'; pop.style.left=r.left+'px'; pop.style.top=r.top+'px';
+    pop.style.color='#ffd700'; pop.style.fontWeight='bold'; pop.style.fontSize='13px'; pop.style.zIndex=999;
+    pop.style.transition='all .7s ease'; document.body.appendChild(pop);
+    requestAnimationFrame(()=>{ pop.style.transform='translateY(-30px)'; pop.style.opacity='0'; });
+    setTimeout(()=>pop.remove(),750);
+  }
+}
+let coinTotal = store.get('pf_coins',0);
+function updateCoins(add){ coinTotal += (add||0); document.getElementById('coincount').textContent = coinTotal; store.set('pf_coins',coinTotal);
+  if(coinTotal===5){ toast('🏆 Achievement: Coin Collector'); Sound.achievement(); }
+}
+
+function buildDock(){
+  const dock = document.getElementById('dock');
+  const items = [
+    ['projects','📁'], ['resume','📜'], ['github','🐙'], ['linkedin','💼'], ['contact','✉️']
+  ];
+  items.forEach(([key,emoji])=>{
+    const b=document.createElement('button'); b.textContent=emoji; b.setAttribute('aria-label','Open '+key);
+    b.addEventListener('click', ()=>{ Sound.click(); WM.create(key); });
+    dock.appendChild(b);
+  });
+}
+
+function toast(msg){
+  const t=document.getElementById('toast'); const card=document.createElement('div');
+  card.className='toastcard'; card.textContent = msg; t.appendChild(card);
+  setTimeout(()=>{ card.style.opacity='0'; card.style.transition='opacity .4s'; setTimeout(()=>card.remove(),400); }, 3200);
+}
+
+/* ---------------------------------------------------------------
+   6. HERO CHARACTER
+--------------------------------------------------------------- */
+function buildHero(){
+  const hero = document.getElementById('hero');
+  const HERO_GRID = [
+    [0,0,3,3,3,3,0,0],
+    [0,3,3,3,3,3,3,0],
+    [0,2,5,5,5,5,2,0],
+    [2,2,5,1,1,5,2,2],
+    [0,2,2,2,2,2,2,0],
+    [0,0,4,2,2,4,0,0],
+    [0,0,4,0,0,4,0,0],
+    [0,0,6,0,0,6,0,0]
+  ];
+  const pal = {1:'#20202a',2:'#f2c9a0',3:'#3a3a52',4:'#2a4fb8',5:'#3a3a52',6:'#111'};
+  const frame = hero.querySelector('.frame');
+  frame.appendChild(makeSprite(HERO_GRID, pal, 3, 28));
+  let pos = 40, dir = 1;
+  function stroll(){
+    hero.classList.add('walk');
+    pos += dir*(60+Math.random()*120);
+    if(pos > window.innerWidth-160){ dir=-1; }
+    if(pos < 20){ dir=1; }
+    hero.style.left = pos+'px';
+    hero.style.transform = dir<0 ? 'scaleX(-1)' : 'scaleX(1)';
+    setTimeout(()=>hero.classList.remove('walk'), 1200);
+  }
+  setInterval(stroll, 5200);
+  hero.addEventListener('click', ()=>{
+    const wave=document.createElement('div'); wave.className='wave'; wave.textContent='👋';
+    hero.appendChild(wave); Sound.notify();
+    setTimeout(()=>wave.remove(),1300);
+  });
+}
+
+/* ---------------------------------------------------------------
+   7. CLOCK
+--------------------------------------------------------------- */
+function tickClock(){
+  const d = new Date();
+  const hh = String(d.getHours()).padStart(2,'0'), mm = String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent = hh+':'+mm;
+  const night = d.getHours() >= 19 || d.getHours() < 6;
+  document.body.classList.toggle('night', night && store.get('pf_theme','auto')==='auto' ? true : store.get('pf_theme','auto')==='night');
+}
+
+/* ---------------------------------------------------------------
+   8. EASTER EGGS: Konami code + hidden credits
+--------------------------------------------------------------- */
+function wireEasterEggs(){
+  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let idx=0;
+  window.addEventListener('keydown', e=>{
+    const k = e.key.length===1 ? e.key.toLowerCase() : e.key;
+    if(k === seq[idx]) idx++; else idx = (k===seq[0]?1:0);
+    if(idx === seq.length){ idx=0; konami(); }
+  });
+  let sunClicks=0;
+  document.getElementById('sun').addEventListener('click', ()=>{
+    sunClicks++;
+    if(sunClicks===5){ WM.create('credits'); toast('Hidden credits unlocked ☀'); Sound.achievement(); sunClicks=0; }
+  });
+}
+function konami(){
+  toast('🎉 KONAMI UNLOCKED — enjoy the confetti');
+  Sound.achievement();
+  for(let i=0;i<40;i++){
+    const c=document.createElement('div'); c.className='confetti';
+    c.style.left = Math.random()*100+'vw'; c.style.top='-10px';
+    c.style.background = ['#e0402a','#f8b800','#00a800','#4a90e2','#ff8fb3'][i%5];
+    c.style.animationDuration = (2+Math.random()*2)+'s';
+    document.getElementById('app').appendChild(c);
+    setTimeout(()=>c.remove(),4200);
+  }
+}
+
+/* ---------------------------------------------------------------
+   9. BOOT SEQUENCE
+--------------------------------------------------------------- */
+function runBoot(){
+  const lines = [
+    'PRATHAMESH.OS  v2.6.0',
+    'MEM CHECK ....... 640K OK',
+    'LOADING GENAI MODULE .... OK',
+    'LOADING FORECASTING ENGINE .... OK',
+    'MOUNTING PORTFOLIO FILESYSTEM ....',
+    'READY.'
+  ];
+  const linesEl = document.getElementById('bootlines');
+  const barEl = document.getElementById('bootbar');
+  for(let i=0;i<10;i++){ const b=document.createElement('div'); b.className='block'; barEl.appendChild(b); }
+  const blocks = barEl.querySelectorAll('.block');
+  let li=0;
+  function nextLine(){
+    if(li<lines.length){
+      const d=document.createElement('div'); d.textContent='> '+lines[li]; d.style.animationDelay='0s';
+      linesEl.appendChild(d); li++;
+      let bi = Math.floor((li/lines.length)*blocks.length);
+      for(let k=0;k<bi;k++) blocks[k].classList.add('filled');
+      setTimeout(nextLine, 260);
+    } else {
+      document.getElementById('startBtn').classList.add('show');
+    }
+  }
+  nextLine();
+  document.getElementById('startBtn').addEventListener('click', ()=>{
+    Sound.startup();
+    document.getElementById('boot').style.opacity='0';
+    setTimeout(()=>{ document.getElementById('boot').style.display='none'; }, 650);
+    document.getElementById('app').classList.add('ready');
+  }, {once:true});
+}
+
+/* ---------------------------------------------------------------
+   10. INIT
+--------------------------------------------------------------- */
+function init(){
+  buildScenery();
+  buildIcons();
+  buildDock();
+  buildHero();
+  wireEasterEggs();
+  updateCoins(0);
+  tickClock(); setInterval(tickClock, 15000);
+
+  const themeToggle = document.getElementById('themeToggle');
+  let theme = store.get('pf_theme','auto');
+  function applyTheme(){
+    if(theme==='night'){ document.body.classList.add('night'); themeToggle.textContent='☾'; }
+    else { document.body.classList.remove('night'); themeToggle.textContent='☀'; }
+  }
+  applyTheme();
+  themeToggle.addEventListener('click', ()=>{
+    theme = theme==='night' ? 'day' : 'night'; store.set('pf_theme', theme);
+    document.body.classList.toggle('night', theme==='night');
+    themeToggle.textContent = theme==='night' ? '☾':'☀';
+    Sound.click();
+  });
+
+  const soundToggle = document.getElementById('soundToggle');
+  soundToggle.textContent = Sound.isMuted() ? '🔇' : '🔊';
+  soundToggle.addEventListener('click', ()=>{
+    const m = Sound.toggleMute(); soundToggle.textContent = m ? '🔇' : '🔊';
+    if(!m) Sound.click();
+  });
+
+  window.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){
+      const focused = document.querySelector('.win.focused');
+      if(focused) focused.querySelector('.close').click();
+    }
+  });
+
+  runBoot();
+}
+if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
+
+})();
+</script>
+</body>
+</html>
